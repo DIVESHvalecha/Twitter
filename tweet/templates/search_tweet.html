@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}tweets{% endblock %}
+
+{% block content %}
+<h1 class = "text-center m-3">Results for {{query}}</h1>
+
+{% for result in results %}
+<div class="card mb-3 bg-info bg-opacity-10 p-3 position-relative">
+  {% if result.user == user %}
+    <div class="btn-group position-absolute top-0 end-0 m-2" role="group">
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: rgba(13, 202, 240, 0.3);">
+        Dropdown
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url "tweet_edit" result.id %}">Edit</a></li>
+        <li><a class="dropdown-item" href="{% url "tweet_delete" result.id %}">Delete</a></li>
+      </ul>
+    </div>
+  {% endif %}
+    {% if result.photo %}
+    <img src="{{result.photo.url}}" class="card-img-top w-50 mx-auto d-block" alt="...">
+    {% endif %}
+  <div class="card-body">
+      <p class="card-text fs-4">{{result.text}}</p>
+      <p class="card-text"><small class="text-body-secondary">Tweet by: {{result.user.username}}</small></p>
+      <p class="card-text"><small class="text-body-secondary">Last updated:{{result.updated_at}}</small></p>
+  </div>
+</div>
+{% endfor %}
+<a href="{% url "tweet_create" %}" class = "btn position-fixed bottom-0 end-0 m-4 btn-lg rounded-pill text-white fw-bold" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" >create a tweet</a>
+{% endblock %}
+

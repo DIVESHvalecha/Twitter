@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}profile Edit{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{form|crispy}}
+    <div class= "d-flex justify-content-between">
+        <button class = "btn rounded text-white mt-3" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" type = "submit">Edit</button>
+        <a href="{% url "profile_detail" user.username %}" class = "btn rounded text-white mt-3" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" >back to My Profile</a>
+    </div>
+</form>
+{% endblock%}

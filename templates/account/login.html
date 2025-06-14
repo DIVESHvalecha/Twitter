@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
+{% block title %}login{% endblock %}
+
+{% block content %}
+<h2>Login page</h2>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form|crispy}}
+
+    <div class= "d-flex justify-content-between">
+        <button class = "btn rounded text-white fw-bold mt-3" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" type = "submit">login</button>
+        <div class= "d-flex align-items-center gap-3">
+            <span>Don't have a account? Register here: </span>
+            <a href="{% url "register" %}" class = "btn rounded text-white fw-bold" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" >register</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

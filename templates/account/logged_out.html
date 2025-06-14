@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}login{% endblock %}
+
+{% block content %}
+<h2>Logged out!</h2>
+
+<div class= "d-flex justify-content-between">
+    <p>You have been logged out.</p>
+    <div class= "d-flex align-items-center gap-3">
+        <span>Login Again: </span>
+        <a href="{% url "login" %}" class = "btn rounded text-white fw-bold mt-3" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" >Login</a>
+    </div>
+</div>
+{% endblock %}

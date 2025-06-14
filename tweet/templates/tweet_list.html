@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}tweet list{% endblock %}
+
+{% block content %}
+<h1 class = "text-center m-3">welcome to Tweet page</h1>
+
+{% for tweet in tweets %}
+<div class="card mb-3 bg-info bg-opacity-10 p-3 pb-0 position-relative">
+    {% if tweet.user == user %}
+      <div class="btn-group position-absolute top-0 end-0 m-2" role="group">
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: rgba(13, 202, 240, 0.3);">
+          Dropdown
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url "tweet_edit" tweet.id %}">Edit</a></li>
+          <li><a class="dropdown-item" href="{% url "tweet_delete" tweet.id %}">Delete</a></li>
+        </ul>
+      </div>
+    {% endif %}
+      {% if tweet.photo %}
+      <img src="{{tweet.photo.url}}" class="card-img-top w-50 mx-auto d-block" alt="...">
+      {% endif %}
+    <div class="card-body">
+        <p class="card-text fs-4">{{tweet.text}}</p>
+        <p class="card-text"><small class="text-body-secondary">Tweet by: {{tweet.user.username}}</small></p>
+        <p class="card-text"><small class="text-body-secondary">Last updated:{{tweet.updated_at}}</small></p>
+    </div>
+    {% if user.is_authenticated %}
+    <form method = "POST" action = "{% url "add_comment" tweet.id %}" class="d-flex" role="search">
+      {% csrf_token %}
+      <textarea class="form-control me-2" type="search" name = "text" placeholder="Add Comment" style="resize: none;"></textarea>
+      <button class = "btn rounded text-white" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" type="submit">comment</button>
+    </form>
+    {% endif %}
+    <a href="{% url "tweet_detail" tweet.id %}" class="text-center text-decoration-none fs-5 py-2 text-white">Read all comments</a>
+</div>
+{% endfor %}
+{% if user.is_authenticated %}
+<a href="{% url "tweet_create" %}" class = "btn position-fixed bottom-0 end-0 m-4 btn-lg rounded-pill text-white fw-bold" style="background-color: rgba(13, 202, 240, 0.3); border: 1px solid rgba(13, 202, 240, 0.3);" >create a tweet</a>
+{% endif %}
+{% endblock %}
+
