@@ -20,11 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.urls import views as auth_views
 from django.views.generic import RedirectView
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tweet/', include('tweet.urls')),
     path('accounts/', include('allauth.urls')),
+    path('', lambda request: redirect('tweet/')),
     
     path('accounts/login/', RedirectView.as_view(url=reverse_lazy('account_login'), permanent=False), name='login'),
     path('accounts/logout/', RedirectView.as_view(url=reverse_lazy('account_logout'), permanent=False), name='logout'),

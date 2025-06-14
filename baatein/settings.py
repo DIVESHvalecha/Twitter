@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-1^(_zi_%!_&gcb_-h+%@$#v^6qmm+rsf#7(p3*=uz+$q^@h6nk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['divesh.pythonanywhere.com']
+ALLOWED_HOSTS = ['divesh.pythonanywhere.com', '127.0.0.1']
 CSRF_TRUSTED_ORIGIN = ['http://divesh.pythonanywhere.com']
 
 
